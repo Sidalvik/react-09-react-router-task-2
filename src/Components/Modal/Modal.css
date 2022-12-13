@@ -1,0 +1,69 @@
+
+.modal {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    background-color: rgba(224, 224, 224, 0.6);
+    backdrop-filter: blur(4px);
+  }
+  
+  .loader,
+  .error {
+    display: flex;
+    flex-direction: column;
+    max-width: 10rem;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    font-size: 1rem;
+  }
+  
+  .loader-circle {
+    font-size: 1.5rem;
+    width: 2.5em;
+    height: 2.5em;
+    margin: 0 auto 0.75em;
+    background-color: transparent;
+    border: 0.5em solid #e0d7d7;
+    border-top-color: #313131;
+    border-radius: 50%;
+    animation: loader 2s linear infinite;
+    -webkit-animation: loader 2s linear infinite;
+  }
+  
+@keyframes loader {
+    0% {
+        transform: rotate(0) scale(0.9);
+    }
+
+    50% {
+        transform: rotate(180deg) scale(1.1);
+    }
+
+    100% {
+        transform: rotate(360deg) scale(0.9);
+    }
+}
+
+@-webkit-keyframes loader {
+    0% {
+        transform: rotate(0) scale(0.9);
+    }
+
+    50% {
+        transform: rotate(180deg) scale(1.1);
+    }
+
+    100% {
+        transform: rotate(360deg) scale(0.9);
+    }
+}
+  
+  .error-logo {
+    font-size: 5rem;
+  }

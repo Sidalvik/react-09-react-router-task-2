@@ -1,0 +1,11 @@
+.close-btn {
+    position: absolute;
+    display: block;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1rem;
+    font-weight: bold;
+    line-height: 1;
+    text-align: center;
+  }
+    

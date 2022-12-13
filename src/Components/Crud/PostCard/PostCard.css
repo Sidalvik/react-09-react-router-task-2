@@ -1,0 +1,30 @@
+.post-card {
+  padding: 1.5rem;
+}
+  
+
+.post-card__title {
+    display: flex;
+    align-content: center;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.avatar-box {
+    height: 2.5rem;
+    width: 2.5rem;
+    border-radius: 50%;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+.avatar {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.post-card__title .author-name {
+    font-weight: bold;
+    color: #0c0c7c;
+}

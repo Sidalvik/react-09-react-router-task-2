@@ -1,0 +1,24 @@
+
+.btn {
+  display: block;
+  padding: 0.25em 1em;
+  color: #000000;
+  background-color: #fff;
+  border: 1px solid gray;
+  text-decoration: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+  
+.blue-btn {
+  color: #ffffff;
+  background-color: #4469ae;
+  border-color: #4469ae;
+}
+  
+.red-btn {
+  color: #ffffff;
+  background-color: #b04546;
+  border-color: #b04546;
+}
+  
