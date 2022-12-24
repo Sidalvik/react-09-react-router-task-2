@@ -5,6 +5,8 @@ import './PostCard.css';
 function PostCard(props) {
   const {post} = props;
 
+  const content = post.content.split('\n').map((item, index) => <p key={index}>{item}</p>);
+
   return (
     <div className='post-card'>
       <div className='post-card__title'>
@@ -13,11 +15,11 @@ function PostCard(props) {
         </div>
         <div>
           <div className="author-name">{post.author || 'Аноним'}</div>
-          <time >{post?.created && (new Date(post?.created).toLocaleDateString('ru', {year: 'numeric', month: 'long', day: 'numeric'}))}</time>
+          <time className='create-time'>{post?.created && (new Date(post?.created).toLocaleDateString('ru', {year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit'}))}</time>
         </div>
       </div>
       <div className="post-card__body">
-        <p>{post.content}</p>
+        {content}
       </div>
     </div>
   )

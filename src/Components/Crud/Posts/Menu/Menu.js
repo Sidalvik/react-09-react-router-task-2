@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './Menu.css';
-import { Link } from 'react-router-dom';
+import Button from '../../Button/Button';
 
 function Menu(props) {
   return (
     <div className='menu'>
-      <Link to='/posts/new' className='btn blue-btn'>Создать пост</Link>
+      <Button type='link' linkTo='/posts/new' color='blue'>Создать пост</Button>
     </div>
   )
 }

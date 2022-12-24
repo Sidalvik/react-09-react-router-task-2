@@ -1,24 +1,45 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import PostCard from '../../PostCard/PostCard';
 import CloseButton from '../../CloseButton/CloseButton';
-// import {Link} from 'react-router-dom';
+import Button from '../../Button/Button';
 
 function EditPost(props) {
+  const {post, form, onChange: handleChange, publicPost, editPost} = props;
+  const contentName='content';
+
+  const handleSave = () => {
+    if (!form || !form[contentName] || (post[contentName] === form[contentName])) return;
+    publicPost(post.id);
+  }
 
   return (
-    <article className='post-card-wrap'>
-      <div className="title-bar">
+    <form className='post-card-wrap'>
+        <CloseButton linkTo={`/posts/${post.id}`} onClick={editPost} />
+      <div className="title">
         <p>Редактировать публикацию</p>
-        <CloseButton/>
       </div>
-      <PostCard/>
-    </article>
+      <div className="post-body">
+        <textarea onChange={handleChange} name={contentName} maxLength='250' value={form ? form[contentName] : ''}></textarea>
+      </div>
+      <div className="btn-bar">
+        <Button type='link' linkTo='/' color='blue' onClick={handleSave}>Сохранить</Button>
+      </div>
+    </form>
   )
 }
 
 EditPost.propTypes = {
-    props: PropTypes.any,
+    post: PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      content: PropTypes.string.isRequired,
+    }),
+    form: PropTypes.shape({
+      content: PropTypes.string,
+    }),
+    setForm: PropTypes.func.isRequired,
+    onChange: PropTypes.func.isRequired,
+    publicPost: PropTypes.func.isRequired,
+    editPost: PropTypes.func.isRequired,
 }
 
 export default EditPost

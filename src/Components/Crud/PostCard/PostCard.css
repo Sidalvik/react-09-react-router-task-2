@@ -2,7 +2,6 @@
   padding: 1.5rem;
 }
   
-
 .post-card__title {
     display: flex;
     align-content: center;
@@ -27,4 +26,13 @@
 .post-card__title .author-name {
     font-weight: bold;
     color: #0c0c7c;
+}
+
+.post-card__title .create-time {
+    color: #444343;
+    font-size: 0.8em;
+}
+
+.post-card__body p {
+    margin-bottom: 0.5em;
 }

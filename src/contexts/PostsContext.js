@@ -1,7 +1,7 @@
 import {createContext} from 'react';
 
-const UrlsContext = createContext({
+const PostsContext = createContext({
     urls: {remouteUrl: process.env.REACT_APP_POSTS_URL},
 });
 
-export default UrlsContext;
+export default PostsContext;

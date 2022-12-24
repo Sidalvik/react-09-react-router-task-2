@@ -4,6 +4,12 @@
     padding: 0;
   }
 
+  a,
+  a:visited {
+    color: inherit;
+    text-decoration: inherit;
+  }
+
   .page {
     max-width: 596px;
     margin: 0 auto;

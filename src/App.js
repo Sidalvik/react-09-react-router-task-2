@@ -1,13 +1,13 @@
 import './App.css';
 import Crud from './Components/Crud/Crud';
-import UrlsProvider from './Components/UrlsProvider/UrlsProvider';
+import PostsProvider from './Components/PostsProvider/PostsProvider';
 
 function App() {
   return (
     <div className="page">
-      <UrlsProvider>
+      <PostsProvider>
         <Crud/>
-      </UrlsProvider>
+      </PostsProvider>
     </div>
   );
 }

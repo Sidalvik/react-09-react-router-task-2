@@ -1,26 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import './Button.css';
 
 function Button(props) {
-  const {type, color, text, onClick: handleClick}  = props;
+  const {type, linkTo, color, onClick: handleClick}  = props;
 
   return (
-    <button type={type} className={color + '-btn btn'} onClick={handleClick}>{text}</button>
+    <>
+      {(type === 'button') && <button type={type} className={color + '-btn btn'} onClick={handleClick}>{props.children}</button>}
+      {(type === 'link') && <Link to={linkTo} className={color + '-btn btn'} onClick={handleClick}>{props.children}</Link>}
+    </>
   )
 }
 
 Button.defaultProps = {
   type: 'button',
+  linkTo: '/',
   color: 'blue',
-  text: 'Кнопка',
-  onClick: () => console.log(`Нажата кнопка: "${this.text}"`),
 }
 
 Button.propTypes = {
-    type: PropTypes.oneOf(['button', 'submit', 'reset', 'menu']),
+    type: PropTypes.oneOf(['button', 'link']),
     color: PropTypes.oneOf(['blue', 'red']),
-    text: PropTypes.string,
+    linkTo: PropTypes.string,
     onClick: PropTypes.func,
 }
 

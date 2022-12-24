@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import PostCard from '../../PostCard/PostCard';
 import './ItemPost.css';
-
-
+import PostCard from '../../PostCard/PostCard';
 
 function ItemPost(props) {
   const {post} = props;
@@ -11,9 +9,6 @@ function ItemPost(props) {
   return (
     <article className='item-post post-card-wrap' role='button'>
         <PostCard post={post}/>
-        <div className="btn-bar">
-            
-        </div>
     </article>
   )
 }

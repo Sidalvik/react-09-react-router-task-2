@@ -1,5 +1,5 @@
 
-.btn {
+body .btn {
   display: block;
   padding: 0.25em 1em;
   color: #000000;
@@ -10,13 +10,13 @@
   cursor: pointer;
 }
   
-.blue-btn {
+body .blue-btn {
   color: #ffffff;
   background-color: #4469ae;
   border-color: #4469ae;
 }
   
-.red-btn {
+body .red-btn {
   color: #ffffff;
   background-color: #b04546;
   border-color: #b04546;
