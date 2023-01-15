@@ -25,9 +25,14 @@ function Post(props) {
       setForm({...thisPost});
     },[thisPost, setForm]);
 
+    if (!thisPost) {
+      return <Page404/>
+    } 
+
   return (
     <>
-        {!thisPost ? <Page404/>: (editable ? <EditPost {...newProps} /> : <ViewPost {...newProps} />)}
+        {!editable && <ViewPost {...newProps} />}
+        {editable && <EditPost {...newProps} />}
     </>
   )
 }
