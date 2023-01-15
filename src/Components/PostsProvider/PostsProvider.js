@@ -3,13 +3,9 @@ import PropTypes from 'prop-types';
 import PostsContext from '../../contexts/PostsContext';
 
 function PostsProvider(props) {
-    const [urls, ] = useState({
-        remouteUrl: process.env.REACT_APP_POSTS_URL,
-    });
     const [postsList, setPostsList] = useState([]);
 
     const posts = {
-        urls,
         postsState: {
             postsList,
             setPostsList,

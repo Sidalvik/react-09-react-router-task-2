@@ -13,7 +13,7 @@ import Page404 from './Page404/Page404';
 
 
 function Crud(props) {
-    const {urls, postsState} = useContext(PostsContext);
+    const {postsState} = useContext(PostsContext);
     const {postsList, setPostsList} = postsState;
     const [isLoading, setIsLoading] = useState(true);
     const [isError, setIsError] = useState(null);
@@ -21,6 +21,7 @@ function Crud(props) {
     const [formEditPost, setFormEditPost] = useStorage(sessionStorage, 'formEditPost', true);
     const [, setAbort] = useState(null);
     
+    const remouteUrl = process.env.REACT_APP_POSTS_URL;
     const postFetch = async (url, options, afterOK, afterError, afterFinally) => {
         try {
             setIsLoading(true);
@@ -60,7 +61,7 @@ function Crud(props) {
             return controller;
         });
 
-        postFetch(urls.remouteUrl, {signal: controller.signal}, (data) => setPostsList(data));
+        postFetch(remouteUrl, {signal: controller.signal}, (data) => setPostsList(data));
     };  //  getPostslist
 
     const handleChange = (event, setForm) => {
@@ -88,7 +89,7 @@ function Crud(props) {
           }),
         };
 
-        postFetch(urls.remouteUrl, options, () => {
+        postFetch(remouteUrl, options, () => {
             setFormNewPost({content: ''});
             getPostslist();
         });
@@ -107,7 +108,7 @@ function Crud(props) {
           }),
         };
 
-        postFetch(urls.remouteUrl, options, () => {
+        postFetch(remouteUrl, options, () => {
             setFormEditPost({content: ''});
             getPostslist();
         });
@@ -119,10 +120,10 @@ function Crud(props) {
             method: 'DELETE',
           };
 
-        postFetch(`${urls.remouteUrl}/${id}`, options, null, null, getPostslist);
+        postFetch(`${remouteUrl}/${id}`, options, null, null, getPostslist);
     };  //  deletingPost
 
-    useEffect( getPostslist, [urls, setPostsList]); //  useEffect
+    useEffect( getPostslist, [remouteUrl, setPostsList]); //  useEffect
     
     const newPostProps = {
         form: formNewPost,
