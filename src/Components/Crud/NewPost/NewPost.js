@@ -7,7 +7,7 @@ import Button from '../Button/Button';
 function NewPost(props) {
   const {form, onChange: handleChange, publicPost} = props;
   const contentName = 'content';
-  
+
   return (
     <>
       <form  className='post-card-wrap'>
@@ -19,7 +19,7 @@ function NewPost(props) {
           <textarea onChange={handleChange} name={contentName} maxLength='250' value={form ? form[contentName] : ''}></textarea>
         </div>
         <div className="btn-bar">
-          <Button type='link' linkTo='/' color='blue' onClick={publicPost}>Опубликовать</Button>
+          <Button color='blue' onClick={publicPost}>Опубликовать</Button>
         </div>
       </form>
     </>

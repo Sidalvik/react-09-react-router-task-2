@@ -4,17 +4,18 @@ import CloseButton from '../../CloseButton/CloseButton';
 import Button from '../../Button/Button';
 
 function EditPost(props) {
-  const {post, form, onChange: handleChange, publicPost, editPost} = props;
+  const {post, form, onChange: handleChange, publicPost, viewPost} = props;
   const contentName='content';
 
   const handleSave = () => {
     if (!form || !form[contentName] || (post[contentName] === form[contentName])) return;
     publicPost(post.id);
+    viewPost();
   }
 
   return (
     <form className='post-card-wrap'>
-        <CloseButton linkTo={`/posts/${post.id}`} onClick={editPost} />
+        <CloseButton linkTo={`/posts/${post.id}`} onClick={viewPost} />
       <div className="title">
         <p>Редактировать публикацию</p>
       </div>
@@ -22,7 +23,7 @@ function EditPost(props) {
         <textarea onChange={handleChange} name={contentName} maxLength='250' value={form ? form[contentName] : ''}></textarea>
       </div>
       <div className="btn-bar">
-        <Button type='link' linkTo='/' color='blue' onClick={handleSave}>Сохранить</Button>
+        <Button color='blue' onClick={handleSave}>Сохранить</Button>
       </div>
     </form>
   )
@@ -40,6 +41,7 @@ EditPost.propTypes = {
     onChange: PropTypes.func.isRequired,
     publicPost: PropTypes.func.isRequired,
     editPost: PropTypes.func.isRequired,
+    viewPost: PropTypes.func.isRequired,
 }
 
 export default EditPost

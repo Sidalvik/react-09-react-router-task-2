@@ -12,8 +12,8 @@ function ViewPost(props) {
         <PostCard post={post}/>
 
       <div className="btn-bar">
-        <Button type='button' color='blue' onClick={editPost}>Изменить</Button>
-        <Button type='link' linkTo={'/'} color='red'  onClick={() => deletingPost(post.id)}>Удалить</Button>
+        <Button color='blue' onClick={editPost}>Изменить</Button>
+        <Button color='red'  onClick={() => deletingPost(post.id)}>Удалить</Button>
       </div>
     </article>   
   )
@@ -28,6 +28,7 @@ ViewPost.propTypes = {
     author: PropTypes.string,
   }),
   editPost: PropTypes.func.isRequired,
+  viewPost: PropTypes.func.isRequired,
   deletePost: PropTypes.func.isRequired,
 
 

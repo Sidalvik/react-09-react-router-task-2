@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './Page404.css';
-import Button from '../Button/Button';
+import {Link} from 'react-router-dom';
 
 function Page404(props) {
 
@@ -9,7 +9,7 @@ function Page404(props) {
     <div className='page-404'>
         <h2>Это страница 404</h2>
         <p>Страницы по адресу "{window.location.href }" не существует</p>
-        <p><Button type='link' linkTo='/'>Вернуться на главную страницу...</Button></p>
+        <p><Link to='/' className='blue-btn btn'>Вернуться на главную страницу...</Link></p>
     </div>
   )
 }

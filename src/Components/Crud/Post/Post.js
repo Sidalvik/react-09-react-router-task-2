@@ -18,12 +18,13 @@ function Post(props) {
     const newProps = {
       ...props,
       post: thisPost,
-      editPost: () => setEditable((prev) => !prev),
+      editPost: () => setEditable(true),
+      viewPost: () => setEditable(false),
     };
 
     useEffect(() => {
       setForm({...thisPost});
-    },[thisPost, setForm]);
+    },[thisPost, setForm, postsState]);
 
     if (!thisPost) {
       return <Page404/>

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import {Routes, Route, useNavigate } from 'react-router-dom';
 import PostsContext from '../../contexts/PostsContext';
 import useStorage from '../../hooks/useStorage';
 import Posts from './Posts/Posts';
@@ -20,18 +20,22 @@ function Crud(props) {
     const [formNewPost, setFormNewPost] = useStorage(sessionStorage, 'formNewPost', true);
     const [formEditPost, setFormEditPost] = useStorage(sessionStorage, 'formEditPost', true);
     const [, setAbort] = useState(null);
+    const navigate = useNavigate();
     
     const remouteUrl = process.env.REACT_APP_POSTS_URL;
     const postFetch = async (url, options, afterOK, afterError, afterFinally) => {
         try {
             setIsLoading(true);
             const response = await fetch(url, options);
-    
             if (response.ok) {
-                try {
-                    const data = await response.json();
-                    (typeof afterOK === 'function') && afterOK(data);
-                } catch (error) {
+                if (!options || !options?.method || options.method.toLocaleLowerCase() === 'get') {
+                    try {
+                        const data = await response.json();
+                        (typeof afterOK === 'function') && afterOK(data);
+                    } catch (error) {
+                        (typeof afterError === 'function') && afterError();
+                    }
+                } else {
                     (typeof afterOK === 'function') && afterOK();
                 }
             } else {
@@ -40,7 +44,6 @@ function Crud(props) {
                 setTimeout(() => setIsError(null), 10 * 1000);
                 (typeof afterError === 'function') && afterError(error);
             }
-            
         } catch (error) {
             if (error.name !== 'AbortError') {
                 setIsError(error);
@@ -53,7 +56,7 @@ function Crud(props) {
         }
     };  //  postFetch
 
-    const getPostslist = () => {
+    const getPostsList = () => {
         const controller = new AbortController();
 
         setAbort((prevAbort) => {
@@ -62,7 +65,7 @@ function Crud(props) {
         });
 
         postFetch(remouteUrl, {signal: controller.signal}, (data) => setPostsList(data));
-    };  //  getPostslist
+    };  //  getPostsList
 
     const handleChange = (event, setForm) => {
         setForm({[event.currentTarget.name]: event.currentTarget.value});
@@ -75,7 +78,7 @@ function Crud(props) {
     const handleChangeEditPost = (event) => {
         handleChange(event, setFormEditPost);
     };  //  handleChangeEditPost
-
+// =====================================================================================================
     const postingNewPost = () => {
         if (!(formNewPost?.content?.length > 0) ) return;
         const options = {
@@ -91,7 +94,8 @@ function Crud(props) {
 
         postFetch(remouteUrl, options, () => {
             setFormNewPost({content: ''});
-            getPostslist();
+            getPostsList();
+            navigate('/', {replace: true});
         });
     };  //  postingNewPost
 
@@ -110,7 +114,7 @@ function Crud(props) {
 
         postFetch(remouteUrl, options, () => {
             setFormEditPost({content: ''});
-            getPostslist();
+            getPostsList();
         });
     };  //  postingEditPost
 
@@ -120,10 +124,13 @@ function Crud(props) {
             method: 'DELETE',
           };
 
-        postFetch(`${remouteUrl}/${id}`, options, null, null, getPostslist);
+        postFetch(`${remouteUrl}/${id}`, options, () => {
+            navigate('/', {replace: true});
+            getPostsList();
+        });
     };  //  deletingPost
 
-    useEffect( getPostslist, [remouteUrl, setPostsList]); //  useEffect
+    useEffect( getPostsList, [remouteUrl, setPostsList]); //  useEffect
     
     const newPostProps = {
         form: formNewPost,
@@ -141,16 +148,16 @@ function Crud(props) {
     }
 
     return (
-        <Router>
+        <>
             <Routes>
-                <Route path='/' exact element={<Posts postsList={postsList}/>}/>
-                <Route path='/posts/new' exact element={<NewPost   {...newPostProps}/>}/>
+                <Route path='/' element={<Posts postsList={postsList}/>}/>
+                <Route path='/posts/new' element={<NewPost {...newPostProps}/>}/>
                 <Route path='/posts/:postId' element={<Post {...editPostProps}/>}/>
                 <Route path='*' element={<Page404/>}/>
             </Routes>
-        {isLoading && <Modal><Loader/></Modal>}
-        {isError && <Modal><ShowError text={isError.message}/></Modal>}
-        </Router>
+            {isLoading && <Modal><Loader/></Modal>}
+            {isError && <Modal><ShowError text={isError.message}/></Modal>}
+        </>
     )
 }
 
